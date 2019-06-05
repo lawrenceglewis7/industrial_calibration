@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<launch>
+
+   
+
+   <arg name="xacro_model" default="$(find industrial_extrinsic_cal)/urdf/ur10_real_sense_target.xacro" />
+   <arg name="gui" default="False" />
+   <arg name="robot1" default="ur10" />
+  
+  <!-- Launch the extrinsic calibration service -->
+  <node pkg="industrial_extrinsic_cal" type="service_node" name="wrist_cal_service" output="screen" >
+    <rosparam>
+      yaml_file_path_: "/home/lawrence/cal_ws/src/industrial_calibration/industrial_extrinsic_cal/yaml/"
+      camera_file: "Basler21511094.yaml"
+      target_file: "m10x10.yaml"
+      target_mount_frame: "world"
+      camera_mount_frame: "tool0"
+      save_data_: true
+      data_directory_: wrist_cal_data
+    </rosparam>
+  </node>
+  
+  <!-- Launch gui to call the transform service -->
+  <node name="cal_gui" pkg="calibrate_gui" type="calibrate_gui" />
+
+  <!-- Launch mutable joint state publisher for calibratable transforms  -->
+  <node  name="ifm_camera_locs" pkg="industrial_extrinsic_cal" type="mutable_joint_state_publisher" >
+    <param name="mutable_joint_state_yaml_file" value="$(find industrial_extrinsic_cal)/yaml/ifm_joint_states.yaml" />
+    <param name="overwrite_mutable_values" value="true" />	
+    <remap from="mutable_joint_states" to="Robot1/joint_states"/>
+  </node>
+
+  <!-- needed for ur10-->
+  <!-- Load the xacro file of the cameras and target onto the parameter server as a robot description -->
+  <param name="$(arg robot1)/robot_description" command="$(find xacro)/xacro --inorder $(arg xacro_model)" />
+  <param name="use_gui" value="$(arg gui)" />
+
+  <!-- Launch robot state publishers for scene -->
+  <node ns="$(arg robot1)" name="ifm_scene_state_publisher" pkg="robot_state_publisher" type="state_publisher" >
+    <!--param name="tf_prefix" value="" /-->
+    <param name="publish_frequency" value="100" />
+  </node>
+
+  <!-- Launch rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find industrial_extrinsic_cal)/config/range_excal.rviz" required="true"/>
+
+</launch> 

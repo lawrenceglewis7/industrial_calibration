@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="abb_irb1600_6_12" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find abb_irb1600_cal_support)/urdf/irb1600_6_12_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/calibration_transform_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/basler_cal_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/asus_sensor_cal_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ifm_cal_macro.xacro"/>
+  
+  <link name="world"/>
+  <link name="tsdf_frame"/>
+
+  <!-- attach tsdf_frame to world -->
+  <joint name="tsdf_to_world" type="fixed">
+    <parent link="world"/>
+    <child link="tsdf_frame"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+    
+  <xacro:abb_irb1600_6_12 prefix=""/>
+  
+  <!-- attach robot to world -->
+  <joint name="world_to_robot" type="fixed">
+    <parent link="world"/>
+    <child  link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+
+  <!-- add target1 to the workcell -->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      target1_frame_x_joint
+      target1_frame_y_joint
+      target1_frame_z_joint
+      target1_frame_yaw_joint
+      target1_frame_pitch_joint
+      target1_frame_roll_joint
+  -->
+  <link name="target1_frame" /> 
+  <xacro:calibration_definitions child_link="target1_frame" parent_link="world"/>
+
+  <!-- add target2 to the robot's tool   
+      This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+        target2_frame_x_joint
+        target2_frame_y_joint
+        target2_frame_z_joint
+        target2_frame_yaw_joint
+        target2_frame_pitch_joint
+        target2_frame_roll_joint
+  -->
+  <link name="target2_frame" />
+  <xacro:calibration_definitions child_link="target2_frame" parent_link="tool0"/>
+
+
+  <!-- add a baser camera attached to the wrist 
+      This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+         basler1_x_joint
+         basler1_y_joint
+         basler1_z_joint
+         basler1_yaw_joint
+         basler1_pitch_joint
+         basler1_roll_joint    
+      <xacro:basler_sensor_definitions prefix="basler1" parent_link="tool0"/>
+  -->
+
+  <!-- add an ifm camera attached to the wrist -->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      ifm_x_joint
+      ifm_y_joint
+      ifm_z_joint
+      ifm_yaw_joint
+      ifm_pitch_joint
+      ifm_roll_joint      
+      <xacro:ifm_sensor_definitions prefix="ifm" parent_link="tool0"/>
+   -->
+
+  <!-- add an asus camera attached to the wrist -->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      asus_link_x_joint
+      asus_link_y_joint
+      asus_link_z_joint
+      asus_link_yaw_joint
+      asus_link_pitch_joint
+      asus_link_roll_joint     
+      <xacro:asus_sensor_definitions prefix="asus" parent_link="tool0"/>
+  -->
+      
+  <!-- add a baser camera in the workcell as the left camera in the stereo pair-->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      basler1_x_joint
+      basler1_y_joint
+      basler1_z_joint
+      basler1_yaw_joint
+      basler1_pitch_joint
+      basler1_roll_joint    -->
+  <xacro:basler_sensor_definitions prefix="basler1" parent_link="world"/>
+
+  <!-- add a  second baser camera in the workcell as the right camera in the stereo pair, note, -->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      basler2_x_joint
+      basler2_y_joint
+      basler2_z_joint
+      basler2_yaw_joint
+      basler2_pitch_joint
+      basler2_roll_joint
+      NOTE: currently these values must be set by hand by typing the values into the mutablejointstates.yaml file
+      stereo-extrinsic calibration is done off line using mcc_scal.launch
+  -->
+  <xacro:basler_sensor_definitions prefix="basler2" parent_link="basler1_optical_frame"/>
+
+  <!-- add a  second baser camera in the workcell as the right camera in the stereo pair, note, -->
+  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
+      basler3_x_joint
+      basler3_y_joint
+      basler3_z_joint
+      basler3_yaw_joint
+      basler3_pitch_joint
+      basler3_roll_joint
+      NOTE: currently these values must be set by hand by typing the values into the mutablejointstates.yaml file
+      stereo-extrinsic calibration is done off line using mcc_scal.launch
+  -->
+  <xacro:basler_sensor_definitions prefix="basler3" parent_link="world"/>
+
+</robot>

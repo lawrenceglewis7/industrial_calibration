@@ -4,14 +4,14 @@
    
 
    <arg name="xacro_model" default="$(find industrial_extrinsic_cal)/urdf/ur10_real_sense_target.xacro" />
-   <arg name="gui" default="False" />
-   <arg name="robot1" default="ur10" />
+   <arg name="gui" default="true" />
+   <arg name="robot1" default="r430" />
   
-  <!-- Launch the extrinsic calibration service -->
+  <!-- Launch the extrinsic calibration service 
   <node pkg="industrial_extrinsic_cal" type="service_node" name="wrist_cal_service" output="screen" >
     <rosparam>
       yaml_file_path_: "/home/lawrence/cal_ws/src/industrial_calibration/industrial_extrinsic_cal/yaml/"
-      camera_file: "Basler21511094.yaml"
+      camera_file: "r430_camera_def.yaml"
       target_file: "m10x10.yaml"
       target_mount_frame: "world"
       camera_mount_frame: "tool0"
@@ -19,13 +19,14 @@
       data_directory_: wrist_cal_data
     </rosparam>
   </node>
+  -->
   
   <!-- Launch gui to call the transform service -->
-  <node name="cal_gui" pkg="calibrate_gui" type="calibrate_gui" />
+  <!-- <node name="cal_gui" pkg="calibration_guis" type="calibration_service_call_gui" /> -->
 
   <!-- Launch mutable joint state publisher for calibratable transforms  -->
-  <node  name="ifm_camera_locs" pkg="industrial_extrinsic_cal" type="mutable_joint_state_publisher" >
-    <param name="mutable_joint_state_yaml_file" value="$(find industrial_extrinsic_cal)/yaml/ifm_joint_states.yaml" />
+  <node  name="r430_camera_locs" pkg="industrial_extrinsic_cal" type="mutable_joint_state_publisher" >
+    <param name="mutable_joint_state_yaml_file" value="$(find industrial_extrinsic_cal)/yaml/r430_camera_def.yaml" />
     <param name="overwrite_mutable_values" value="true" />	
     <remap from="mutable_joint_states" to="Robot1/joint_states"/>
   </node>
@@ -42,6 +43,6 @@
   </node>
 
   <!-- Launch rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find industrial_extrinsic_cal)/config/range_excal.rviz" required="true"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find industrial_extrinsic_cal)/config/r430_cal.rviz" required="true"/>
 
 </launch> 

@@ -2,7 +2,8 @@
 <robot name="ur10" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ur10_macro.xacro"/>
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/calibration_transform_macro.xacro"/>
-  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/_r430.urdf.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/r430_def_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ifm_cal_macro.xacro"/>
   
   <link name="world"/>
   <link name="tsdf_frame"/>
@@ -14,7 +15,7 @@
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
     
-  <xacro:ur10_robot prefix=""/>
+  <xacro:ur10_robot prefix="" joint_limited="true"/>
   
   <!-- attach robot to world -->
   <joint name="world_to_robot" type="fixed">
@@ -49,7 +50,6 @@
   <xacro:calibration_definitions child_link="target2_frame" parent_link="tool0"/>
   -->
 
-
   <!-- add a baser camera attached to the wrist 
       This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node
          basler1_x_joint
@@ -57,21 +57,25 @@
          basler1_z_joint
          basler1_yaw_joint
          basler1_pitch_joint
-         basler1_roll_joint    -->
-      <xacro:basler_sensor_definitions prefix="basler1" parent_link="tool0"/>
-      <xacro:sensor_r430 parent_link="tool0" prefix="r430_1">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </xacor:sensor_r430>
+         basler1_roll_joint    
+  <xacro:basler_sensor_definitions prefix="basler1" parent_link="tool0"/>
+  -->
 
-  <!-- add an ifm camera attached to the wrist -->
-  <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node 
+  <!-- add real sense r430 to the wrist -->
+  <xacro:sensor_r430 prefix="r430_1" parent_link="tool0">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:sensor_r430>
+
+  <!-- add an ifm camera attached to the wrist
+      This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node 
       ifm_x_joint
       ifm_y_joint
       ifm_z_joint
       ifm_yaw_joint
       ifm_pitch_joint
-      ifm_roll_joint      -->
-      <xacro:ifm_sensor_definitions prefix="ifm" parent_link="tool0"/>
+      ifm_roll_joint      
+   -->
+  <xacro:ifm_sensor_definitions prefix="ifm" parent_link="tool0"/>
 
   <!-- add an asus camera attached to the wrist -->
   <!--This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node

@@ -64,6 +64,8 @@ target_link_libraries(cal_gui
   Qt5::PrintSupport
   )
 
+#add_executable(calibration_service_call_gui    src/calibration_gui.cpp)
+
 # Add compiler flags for building executables (-fPIE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS} -std=c++11")
 

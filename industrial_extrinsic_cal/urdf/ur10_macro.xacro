@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
 
 <!--
   Author: Kelsey Hawkins 
@@ -9,7 +9,7 @@
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ur10.transmission.xacro" />
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ur10.gazebo.xacro" />
 
-  <xacro:property name="pi" value="3.14159265" />
+  <!-- <xacro:property name="pi" value="3.14159265" /> -->
 
   <!-- Inertia parameters -->
   <xacro:property name="base_mass" value="4.0" />  <!-- This mass might be incorrect -->

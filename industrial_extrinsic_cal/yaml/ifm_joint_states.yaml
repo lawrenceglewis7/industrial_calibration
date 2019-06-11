@@ -4,3 +4,9 @@ ifm1_x_joint: 0.2296850263210265
 ifm1_y_joint: 0.2116635577672013
 ifm1_yaw_joint: -0.2170630416582483
 ifm1_z_joint: 1.178582905710999
+r430_1_x_joint: 1.00000
+r430_1_y_joint: 1.00000
+r430_1_z_joint: 1.00000
+r430_1_yaw_joint: 1.00000
+r430_1_pitch_joint: 1.00000
+r430_1_roll_joint: 1.00000

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <include file="$(find ur_gazebo)/launch/ur10.launch">
+     <arg name="limited" value="true"/>
+  </include>
+  
+  <include file="$(find ur10_moveit_config)/launch/ur10_moveit_planning_execution.launch">
+     <arg name="sim" value="true"/>
+     <arg name="limited" value="true"/>
+  </include>
+
+  <include file="$(find ur10_moveit_config)/launch/moveit_rviz.launch">
+     <arg name="config" value="true"/>
+  </include>
+
+  <!-- Launch mutable joint state publisher for calibratable transforms  -->
+  <node  name="r430_camera_locs" pkg="industrial_extrinsic_cal" type="mutable_joint_state_publisher" >
+    <param name="mutable_joint_state_yaml_file" value="$(find industrial_extrinsic_cal)/yaml/r430_camera_def.yaml" />	
+    <remap from="mutable_joint_states" to="Robot1/joint_states"/>
+    <param name="overwrite_mutable_values" value="true" />
+  </node>
+
+  <!-- joint state publisher which combines the mutable and the real joint states for the scene -->
+  <node name="combined_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+
+     <!-- joint_state_publisher will forward joints it recieves on the topics specified in the 'source_list' parameter -->
+     <rosparam param="source_list">["Robot1/joint_states", "mutable_joint_states"]</rosparam>
+<!--
+     <param name="publish_default_velocities" value="true" />
+     <param name="publish_default_efforts" value="true" />
+     <param name="publish_default_positions" value="true" />
+-->
+  </node>
+
+
+
+</launch>

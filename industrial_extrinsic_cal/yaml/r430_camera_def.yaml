@@ -1,6 +1,12 @@
-    r430_1_x_joint: 1.00000
-    r430_1_y_joint: 1.00000
-    r430_1_z_joint: 1.00000
-    r430_1_yaw_joint: 1.00000
-    r430_1_pitch_joint: 1.00000
-    r430_1_roll_joint: 1.00000
+r430_1_x_joint: 1.00000
+r430_1_y_joint: 1.00000
+r430_1_z_joint: 1.00000
+r430_1_yaw_joint: 1.00000
+r430_1_pitch_joint: 1.00000
+r430_1_roll_joint: 1.00000
+target1_frame_x_joint: 1.00000
+target1_frame_y_joint: 1.00000
+target1_frame_z_joint: 1.00000
+target1_frame_yaw_joint: 1.00000
+target1_frame_pitch_joint: 1.00000
+target1_frame_roll_joint: 1.00000

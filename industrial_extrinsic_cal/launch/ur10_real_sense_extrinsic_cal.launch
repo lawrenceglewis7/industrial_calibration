@@ -4,7 +4,7 @@
    
 
    <arg name="xacro_model" default="$(find industrial_extrinsic_cal)/urdf/ur10_real_sense_target.xacro" />
-   <arg name="gui" default="true" />
+   <arg name="gui" default="false" />
    <arg name="robot1" default="r430" />
   
   <!-- Launch the extrinsic calibration service 

@@ -2,7 +2,7 @@
 <robot name="ur10" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ur10_macro.xacro"/>
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/calibration_transform_macro.xacro"/>
-  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/r430_def_macro.xacro"/>
+  <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/astra_cal_macro.xacro"/>
   <xacro:include filename="$(find industrial_extrinsic_cal)/urdf/ifm_cal_macro.xacro"/>
   
   <link name="world"/>
@@ -62,9 +62,8 @@
   -->
 
   <!-- add real sense r430 to the wrist -->
-  <xacro:sensor_r430 prefix="r430_1" parent_link="tool0">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-  </xacro:sensor_r430>
+  <xacro:astra_sensor_definitions prefix="r430_1" parent_link="tool0"/>
+
 
   <!-- add an ifm camera attached to the wrist
       This adds the following mutable joint states, add them to the mutable joint states yaml file and run the node 

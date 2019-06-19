@@ -193,7 +193,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call capture Trigger");
+      ROS_ERROR("Failed to call capture Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -206,7 +206,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call execute Trigger");
+      ROS_ERROR("Failed to call execute Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -219,7 +219,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call execute with call Trigger");
+      ROS_ERROR("Failed to call execute with call Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -232,7 +232,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call Move End Trigger");
+      ROS_ERROR("Failed to call Move End Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -245,7 +245,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call Move Next Trigger");
+      ROS_ERROR("Failed to call Move Next Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -258,7 +258,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call Move Previous Trigger");
+      ROS_ERROR("Failed to call Move Previous Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 
@@ -271,7 +271,7 @@ TrajectoryPanel::TrajectoryPanel( QWidget* parent )
     }
     else
     {
-      ROS_ERROR("Failed to call Move Start Trigger");
+      ROS_ERROR("Failed to call Move Start Trigger. Make sure wrist_cal_node and joint_traj_node are launched.");
     }
   }
 

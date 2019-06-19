@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="calibration_xform" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="calibration_xform" xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro name="calibration_definitions" params="child_link parent_link">
     <link name="${child_link}_x_trans">
       <visual>

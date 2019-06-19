@@ -14,6 +14,7 @@
      <arg name="config" value="true"/>
   </include>
 
+
   <!-- Launch mutable joint state publisher for calibratable transforms  -->
   <node  name="r430_camera_locs" pkg="industrial_extrinsic_cal" type="mutable_joint_state_publisher" >
     <param name="mutable_joint_state_yaml_file" value="$(find industrial_extrinsic_cal)/yaml/r430_camera_def.yaml" />	
@@ -33,6 +34,35 @@
 -->
   </node>
 
+  <!-- Launch service which is called to to indicate scene is ready  when someone needs to set a parameter to indicate scene is ready -->
+  <node pkg="industrial_extrinsic_cal" type="trigger_service" name="rosSceneTrigger" output="screen" />
+
+  <!-- Launch service which is called to to indicate scene is ready  when a robot action is required to update the scene -->
+  <node pkg="industrial_extrinsic_cal" type="ros_robot_trigger_action_service" name="rosRobotSceneTrigger" output="screen" />
+
+
+  <!--Launch manual_calt_adjust serviece to be able to move camera into approximatly the correct position also adjust the last two arguments if you want to be able to move a smaller or larger amount-->
+  <node pkg="industrial_extrinsic_cal" type="manual_calt_adjust" name="manual_part_adjust" args="r430_1 .2 .2"/>
+
+  <node name="joint_traj" pkg="caljob_creator" type="joint_traj_node" output="screen">
+    <param name="input_file" value="$(find ur10_moveit_config)/config/joint_traj.yaml"/>
+    <param name="output_file" value="$(find ur10_moveit_config)/config/joint_traj_new.yaml"/>
+    <param name="motion_server" value="rosRobotSceneTrigger_joint_values"/>
+    <param name="joints_topic" value="/Robot1/joint_states"/>
+    <param name="trigger_server" value="/WristCalSrvObs"/>
+    <param name="pause_time" value="2.0"/>	
+  </node>
+
+  <!-- launch wrist_cal_srv for rviz plugin gui -->
+  <node pkg="industrial_extrinsic_cal" type="wrist_cal_srv" name="wrist_cal_srv">
+    <param name="yaml_file_path" value="$(find industrial_extrinsic_cal)/yaml/"/>
+    <param name="camera_file" value="real_sense_2.yaml"/>
+    <param name="target_file" value="m10x10.yaml"/>
+    <param name="target_mount_frame" value="world"/>
+    <param name="camera_mount_frame" value="tool0"/>
+    <param name="save_data" value="true"/>	
+    <param name="data_directory" value="(find industrial_extrinsic_cal)/data"/>
+  </node>
 
 
 </launch>

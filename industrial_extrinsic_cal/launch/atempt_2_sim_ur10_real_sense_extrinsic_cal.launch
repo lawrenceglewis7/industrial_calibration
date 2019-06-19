@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 <launch>
+  
+  <param name="~base_calibration_name" value="WristCalSrv"/>
 
   <include file="$(find ur_gazebo)/launch/ur10.launch">
      <arg name="limited" value="true"/>

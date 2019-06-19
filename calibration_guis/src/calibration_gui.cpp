@@ -29,7 +29,7 @@ namespace calibration_guis
     std::string bcn;
     if(!pnh.getParam("base_calibration_name",bcn))
     {
-      ROS_ERROR("MUST SET base_calibration_name");
+      ROS_ERROR("MUST SET base_calibration_name to IntrinsicCalSrv or WristCalSrv");
       bcn="/IntrinsicCalSrv";
       pnh.setParam("base_calibration_name",bcn);
     }

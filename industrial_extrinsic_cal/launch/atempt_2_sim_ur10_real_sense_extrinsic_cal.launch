@@ -64,6 +64,7 @@
     <param name="camera_mount_frame" value="tool0"/>
     <param name="save_data" value="true"/>	
     <param name="data_directory" value="(find industrial_extrinsic_cal)/data"/>
+    <param name="use_circle_detector" value="true"/>
   </node>
 
 

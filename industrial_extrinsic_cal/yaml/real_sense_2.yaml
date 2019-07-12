@@ -2,12 +2,12 @@
 
 static_cameras:
  -
-    camera_name: RealSenseIntel
+    camera_name: r430/rgb
     trigger: NO_WAIT_TRIGGER
-    image_topic: /image_colorc
-    camera_optical_frame: /optical_frame1
-    transform_interface: ros_camera_bti
-    camera_housing_frame: astra
+    image_topic: /r430/rgb/image_raw
+    camera_optical_frame: r430_rgb_optical_frame
+    transform_interface: ros_camera_cti
+    camera_housing_frame: r430
     camera_mounting_frame: tool0
     image_directory: home/lawrence/cal_ws/src/industrial_calibration/cal_images
     focal_length_x: 892.33958
@@ -21,3 +21,4 @@ static_cameras:
     distortion_p2: 0.00000
     image_width:  1920
     image_height: 1080
+

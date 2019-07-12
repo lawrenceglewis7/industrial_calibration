@@ -12,6 +12,7 @@ static_targets:
      target_rows: 10
      target_cols: 10
      num_points: 100
+     publish_vis_marker: True
      points:
       - pnt: [  0.0000,  0.1800, 0.0000]
       - pnt: [  0.0200,  0.1800, 0.0000]

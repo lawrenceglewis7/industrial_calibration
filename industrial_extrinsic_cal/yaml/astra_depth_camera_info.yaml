@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: astra
+camera_matrix:
+   rows: 3
+   cols: 3
+   data: [554.4103282793371, 0.0, 312.8103089466471, 0.0, 555.7086868536227, 247.0286554399509, 0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+   rows: 1
+   cols: 5
+   data: [0.060776126306659045, -0.07697204912901476, 0.007992631737677936, -0.003991359449169227, 0.0]
+rectification_matrix:
+   rows: 3
+   cols: 3
+   data: [ 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+projection_matrix:
+   rows: 3
+   cols: 4
+   data: [564.0424194335938, 0.0, 310.22000907712936, 0.0, 0.0, 564.560546875, 250.5838558054529, 0.0, 0.0, 0.0, 1.0, 0.0]
